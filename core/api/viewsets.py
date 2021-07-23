@@ -5,9 +5,14 @@ from core.models import Conta
 from .serializers import ContaSerializer
 
 
+
 class ContaViewSet(ModelViewSet):
     queryset = Conta.objects.all()
     serializer_class = ContaSerializer
+
+    @action(methods=['put'], detail=True)
+    def transacao(self, request, pk):
+        return Response({'Hello': pk})
 
 """ def get_queryset(self):
     return Conta.objects.all()

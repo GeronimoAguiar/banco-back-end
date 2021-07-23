@@ -2,7 +2,7 @@ from django.db import models
 
 class Conta(models.Model):
     titular = models.CharField(max_length=150)
-    conta = models.CharField(primary_key=True, max_length=10)
+    conta = models.IntegerField(primary_key=True)
     tipo = models.CharField(max_length=15)
     saldo = models.DecimalField(max_digits=10, decimal_places=2)
     limite = models.DecimalField(max_digits=10, decimal_places=2)
@@ -10,4 +10,4 @@ class Conta(models.Model):
 
 
     def __str__(self):
-        return self.conta
+        return self.titular

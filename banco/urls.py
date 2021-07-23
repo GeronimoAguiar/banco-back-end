@@ -18,6 +18,14 @@ from django.urls import path
 from django.conf.urls import include
 from rest_framework import routers
 from core.api.viewsets import ContaViewSet
+from django.conf.urls import url
+from rest_framework_swagger.views import get_swagger_view
+
+schema_view = get_swagger_view(title='Pastebin API')
+
+
+
+
 
 router = routers.DefaultRouter()
 router.register(r'contas', ContaViewSet, basename='Conta')
@@ -25,4 +33,5 @@ router.register(r'contas', ContaViewSet, basename='Conta')
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
+    path(r'^$', schema_view)
 ]
