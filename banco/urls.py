@@ -33,5 +33,4 @@ router.register(r'contas', ContaViewSet, basename='Conta')
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
-    path(r'^$', schema_view)
 ]

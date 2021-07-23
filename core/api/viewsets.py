@@ -7,34 +7,40 @@ from .serializers import ContaSerializer
 
 
 class ContaViewSet(ModelViewSet):
-    queryset = Conta.objects.all()
+
     serializer_class = ContaSerializer
 
-    @action(methods=['put'], detail=True)
-    def transacao(self, request, pk):
-        return Response({'Hello': pk})
+    def get_queryset(self):
+        conta = self.request.query_params.get('conta', None)
+        titular = self.request.query_params.get('titular', None)
+        queryset = Conta.objects.all()
 
-""" def get_queryset(self):
-    return Conta.objects.all()
+        if conta:
+            queryset = Conta.objects.filter(pk=conta)
 
-def list(self, request, *args, **kwargs):
-    return Response({'Hello': request.data['nome']})
+        if titular:
+            queryset = queryset.filter(titular=titular)
 
-def create(self, request, *args, **kwargs):
-    return Response({'Hello': request.data['nome']})
+        return queryset
 
-def destroy(self, request, *args, **kwargs):
-    pass
+    def list(self, request, *args, **kwargs):
+        return super(ContaViewSet, self).list(request, *args, **kwargs)
 
-def retrieve(self, request, *args, **kwargs):
-    pass
+    def create(self, request, *args, **kwargs):
+        return super(ContaViewSet, self).create(request, *args, **kwargs)
 
-def update(self, request, *args, **kwargs):
-    pass
+    def destroy(self, request, *args, **kwargs):
+        return super(ContaViewSet, self).destroy(request, *args, **kwargs)
 
-def partial_update(self, request, *args, **kwargs):
-    pass
+    def retrieve(self, request, *args, **kwargs):
+        return super(ContaViewSet, self).retrieve(request, *args, **kwargs)
 
-@action(methods=['get'], detail=True)
-def denunciar(self, request, pk):
-    pass"""
+    def update(self, request, *args, **kwargs):
+        return super(ContaViewSet, self).update(request, *args, **kwargs)
+
+    def partial_update(self, request, *args, **kwargs):
+        return super(ContaViewSet, self).partial_update(request, *args, **kwargs)
+
+    @action(methods=['get'], detail=True)
+    def denunciar(self, request, pk):
+        pass

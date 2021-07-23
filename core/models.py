@@ -7,6 +7,7 @@ class Conta(models.Model):
     saldo = models.DecimalField(max_digits=10, decimal_places=2)
     limite = models.DecimalField(max_digits=10, decimal_places=2)
     fatura = models.DecimalField(max_digits=10, decimal_places=2)
+    email = models.EmailField()
 
 
     def __str__(self):
